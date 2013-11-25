@@ -1,7 +1,9 @@
 import com.healthmarketscience.jackcess.*;
+import org.apache.commons.lang.*;
 import java.io.*;
 import java.util.*;
 import java.net.*;
+
 
 public class AccessExport {
     public static void main(String []args) throws IOException {
@@ -22,11 +24,9 @@ public class AccessExport {
             Iterator<Row> rows = table.iterator();
             while(rows.hasNext()) {
                 Row row = rows.next();
-                /*
                 if(!table.getName().equals("Cassava_Descriptors")) {
                     continue;
                 }
-                */
                 
                 // each row
                 String instanceId = String.valueOf(row.get(firstCol));
@@ -40,11 +40,10 @@ public class AccessExport {
                     if(entry.getValue() != null) {
                         
                         String key = String.valueOf(entry.getKey());
-                        key = key.replaceAll(" ", "_");
                         key = URLEncoder.encode(key, "UTF-8");
 
                         String value = String.valueOf(entry.getValue());
-                        value = value.replaceAll("\"", "\\\\\"");
+                        value = StringEscapeUtils.escapeJava(value);
 
                         list.add("    <" + table.getName() + "/" + key + "> \"\"\"" + value + "\"\"\"");
                     }
