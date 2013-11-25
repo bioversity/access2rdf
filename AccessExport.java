@@ -29,7 +29,7 @@ public class AccessExport {
                     c++;
                     if(entry.getValue() != null) {
 
-                        System.out.print("    <" + table.getName() + "/" + entry.getKey() + "> \"\"\"" + entry.getValue() + "\"\"\"");
+                        System.out.print("    <" + table.getName() + "/" + entry.getKey().replaceAll(" ", "_") + "> \"\"\"" + entry.getValue() + "\"\"\"");
                         if(c != row.size()) {
                             System.out.println(";");
                         }
@@ -37,10 +37,9 @@ public class AccessExport {
                 }
                 System.out.println("");
                 System.out.println("    .");
+
             }
 
-            // XXX stop first table
-            break;
         }
     }
 }
