@@ -24,9 +24,11 @@ public class AccessExport {
             Iterator<Row> rows = table.iterator();
             while(rows.hasNext()) {
                 Row row = rows.next();
+                /*
                 if(!table.getName().equals("Cassava_Descriptors")) {
                     continue;
                 }
+                */
                 
                 // each row
                 String instanceId = String.valueOf(row.get(firstCol));
