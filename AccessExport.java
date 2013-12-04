@@ -15,10 +15,13 @@ public class AccessExport {
             Table table = iter.next();
             // find primary key
             List<? extends Column> columns = table.getColumns();
-            String firstCol = "";
+            String instanceCol = "";
             for(Column col : columns) {
-                firstCol = col.getName();
+                instanceCol = col.getName();
                 break;
+            }
+            if(table.getName().equals("MISSIONS_SAMPLES_SITES")) {
+                instanceCol = "NEW_ID_SAMPLE";
             }
 
             Iterator<Row> rows = table.iterator();
@@ -31,7 +34,7 @@ public class AccessExport {
                 */
                 
                 // each row
-                String instanceId = String.valueOf(row.get(firstCol));
+                String instanceId = String.valueOf(row.get(instanceCol));
                 instanceId = URLEncoder.encode(instanceId, "UTF-8");
 
                 System.out.println("<" + table.getName() + "/" + instanceId + "> a <" + table.getName() + ">;");
